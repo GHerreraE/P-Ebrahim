@@ -1,6 +1,10 @@
-import React, { useEffect } from 'react';
-import { HashRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
-import { ShieldCheck, Truck, Leaf, Mail, MapPin, ChevronRight } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
+import { ShieldCheck, Truck, Leaf, Mail, MapPin, Phone, Menu, X } from 'lucide-react';
+
+// Import Assets
+import logoImg from './assets/logo.png';
+import headerBg from './assets/header-bg.jpg';
 
 // --- UTILITAIRES ---
 function ScrollToTop() {
@@ -10,35 +14,64 @@ function ScrollToTop() {
 }
 
 // --- COMPOSANTS FIXES ---
-const Navbar = () => (
-  <nav>
-    <div className="container nav-flex">
-      <Link to="/" className="logo">Ebrahimi Group</Link>
-      <div className="nav-links">
-        <Link to="/">Accueil</Link>
-        <Link to="/about">À Propos</Link>
-        <Link to="/products">Nos Produits</Link>
-        <Link to="/b2b">Espace Pro</Link>
-        <Link to="/contact">Contact</Link>
+const Navbar = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
+
+  // Close menu when route changes
+  useEffect(() => {
+    setIsOpen(false);
+  }, [location]);
+
+  return (
+    <nav>
+      <div className="container nav-flex">
+        <Link to="/" className="logo-container">
+          <img src={logoImg} alt="Ebrahimi Group" className="nav-logo" />
+        </Link>
+
+        {/* Desktop Menu */}
+        <div className="nav-links desktop-only">
+          <Link to="/">Accueil</Link>
+          <Link to="/about">À Propos</Link>
+          <Link to="/products">Nos Produits</Link>
+          <Link to="/b2b">Espace Pro</Link>
+          <Link to="/contact">Contact</Link>
+        </div>
+
+        {/* Mobile Menu Button */}
+        <button className="mobile-menu-btn" onClick={() => setIsOpen(!isOpen)}>
+          {isOpen ? <X size={28} color="var(--color-black)" /> : <Menu size={28} color="var(--color-black)" />}
+        </button>
+
+        {/* Mobile Dropdown */}
+        <div className={`mobile-menu ${isOpen ? 'open' : ''}`}>
+          <Link to="/">Accueil</Link>
+          <Link to="/about">À Propos</Link>
+          <Link to="/products">Nos Produits</Link>
+          <Link to="/b2b">Espace Pro</Link>
+          <Link to="/contact">Contact</Link>
+        </div>
       </div>
-    </div>
-  </nav>
-);
+    </nav>
+  );
+};
 
 const Footer = () => (
   <footer>
     <div className="container">
       <div className="footer-grid">
         <div>
-          <h3 style={{fontSize: '1.5rem', marginBottom: '20px'}}>EBRAHIMI GROUP</h3>
+          <h3 style={{fontSize: '1.5rem', marginBottom: '20px', fontFamily: 'var(--font-heading)'}}>EBRAHIMI GROUP</h3>
           <p style={{opacity: 0.8}}>Importateur et distributeur suisse de safran premium.</p>
           <div style={{marginTop: '30px', opacity: 0.8}}>
-            <p style={{display: 'flex', alignItems: 'center', gap: '10px'}}><MapPin size={18} color="#D4AF37"/> Basé en Suisse</p>
-            <p style={{display: 'flex', alignItems: 'center', gap: '10px'}}><Mail size={18} color="#D4AF37"/> contact@ebrahimi-group.ch</p>
+            <p style={{display: 'flex', alignItems: 'center', gap: '10px'}}><MapPin size={18} color="var(--color-gold)"/> Basé en Suisse</p>
+            <p style={{display: 'flex', alignItems: 'center', gap: '10px'}}><Mail size={18} color="var(--color-gold)"/> info@ebrahimi-group.ch</p>
+             <p style={{display: 'flex', alignItems: 'center', gap: '10px'}}><Phone size={18} color="var(--color-gold)"/> +41 78 268 44 84</p>
           </div>
         </div>
         <div style={{textAlign: 'right', display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
-          <p style={{fontStyle: 'italic', fontSize: '1.4rem', color: '#D4AF37', lineHeight: '1.4'}}>
+          <p style={{fontStyle: 'italic', fontSize: '1.4rem', color: 'var(--color-green)', lineHeight: '1.4', fontFamily: 'var(--font-heading)'}}>
             "Derrière chaque filament de safran, il y a une terre, un savoir-faire et des mains qui travaillent avec patience et dignité."
           </p>
         </div>
@@ -56,23 +89,19 @@ const Footer = () => (
 const Home = () => (
   <>
     {/* HERO SECTION */}
-    <div style={{
-      backgroundColor: '#111', 
-      color: 'white', 
-      padding: '160px 0', 
-      textAlign: 'center',
-      backgroundImage: 'linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), url("https://images.unsplash.com/photo-1596558693722-1d7c927f310f?q=80&w=2000&auto=format&fit=crop")',
-      backgroundSize: 'cover',
-      backgroundPosition: 'center'
+    <div className="hero-section" style={{
+      backgroundImage: `url(${headerBg})`
     }}>
-      <div className="container">
-        <h1 style={{marginBottom: '20px', letterSpacing: '1px'}}>SAFRAN PREMIUM &<br/>PRODUITS SECS</h1>
-        <p style={{fontSize: '1.3rem', maxWidth: '700px', margin: '0 auto 50px', fontWeight: '300'}}>
-          De la terre à la table, une sélection d’exception, cultivée avec soin pour une qualité authentique.
+      <div className="hero-overlay"></div>
+      <div className="container hero-content">
+        <h1 className="hero-title">DISTRIBUTEUR<br/>SAFRAN ET PRODUITS ALIMENTAIRES SECS</h1>
+        <p className="hero-subtitle">
+          Partenaire privilégié des professionnels de la gastronomie et de l'industrie.
+          <br/>Importation directe, certification ISO 3632 et traçabilité totale.
         </p>
-        <div style={{display: 'flex', gap: '20px', justifyContent: 'center'}}>
-          <Link to="/products" className="btn" style={{backgroundColor: '#D4AF37', border: 'none', color: 'black'}}>Commander (Particuliers)</Link>
-          <Link to="/b2b" className="btn btn-outline">Espace Professionnel</Link>
+        <div style={{display: 'flex', gap: '20px', justifyContent: 'center', flexWrap: 'wrap'}}>
+          <Link to="/products" className="btn btn-primary">Nos Produits</Link>
+          <Link to="/contact" className="btn btn-outline-dark">Devenir Partenaire</Link>
         </div>
       </div>
     </div>
@@ -80,15 +109,15 @@ const Home = () => (
     {/* INTRO SERIEUSE */}
     <section>
       <div className="container text-center">
-        <h2 className="text-gold">Une Entreprise Suisse</h2>
-        <p style={{maxWidth: '800px', margin: '0 auto', fontSize: '1.1rem'}}>
-          Ebrahimi Group est spécialisée dans l’importation, le conditionnement et la distribution. 
-          Nous garantissons la traçabilité complète et la conformité de produits issus de régions agricoles reconnues.
+        <h2 className="section-title">Excellence Suisse et Origine Certifiée</h2>
+        <p style={{maxWidth: '800px', margin: '0 auto', fontSize: '1.1rem', color: 'var(--color-text-light)'}}>
+          Basé en Suisse, Ebrahimi Group assure le lien direct entre les terroirs d'exception et le marché européen. 
+          Nous garantissons une chaine de valeur éthique et une qualité constante pour nos clients exigeants.
         </p>
-        <div style={{marginTop: '50px', display: 'flex', justifyContent: 'center', gap: '60px', flexWrap: 'wrap'}}>
-          <div><ShieldCheck size={40} className="text-gold"/><p>Qualité Contrôlée</p></div>
-          <div><Leaf size={40} className="text-gold"/><p>100% Naturel</p></div>
-          <div><Truck size={40} className="text-gold"/><p>Importateur Direct</p></div>
+        <div className="features-grid">
+          <div className="feature-item"><ShieldCheck size={40} className="text-gold"/><p>Grade 1 (ISO 3632)</p></div>
+          <div className="feature-item"><Leaf size={40} className="text-green"/><p>Agriculture Raisonnée</p></div>
+          <div className="feature-item"><Truck size={40} className="text-gold"/><p>Logistique Suisse</p></div>
         </div>
       </div>
     </section>
@@ -96,69 +125,79 @@ const Home = () => (
 );
 
 const About = () => (
-  <section className="container">
+  <section className="container section-commitment">
     <div style={{maxWidth: '900px', margin: '0 auto'}}>
-      <h1 className="text-center mb-40">Notre Engagement</h1>
-      <p style={{fontSize: '1.1rem', marginBottom: '20px'}}>
-        Chez Ebrahimi Group, nous croyons qu’un produit de qualité commence par le respect de l’humain et du travail agricole.
-      </p>
-      <p style={{fontSize: '1.1rem', marginBottom: '40px'}}>
-        Nous collaborons avec des producteurs agricoles sélectionnés et soutenons indirectement l’activité de femmes engagées dans les étapes de récolte et de transformation, contribuant ainsi à une économie locale plus stable.
-      </p>
+      <div className="commitment-header text-center">
+        <h1 className="section-title">Notre Engagement</h1>
+        <p className="lead-text">
+          Chez Ebrahimi Group, nous croyons qu’un produit de qualité commence par le respect de l’humain et du travail agricole.
+        </p>
+      </div>
       
-      <div style={{background: '#f9f9f9', padding: '40px', borderLeft: '4px solid #D4AF37'}}>
-        <h3 style={{marginTop: 0}}>Notre rôle en Suisse</h3>
-        <ul style={{listStyle: 'none', padding: 0}}>
-          <li style={{marginBottom: '10px'}}>✔️ Sélection rigoureuse des lots</li>
-          <li style={{marginBottom: '10px'}}>✔️ Contrôle de la traçabilité et analyses (ISO 3632)</li>
-          <li style={{marginBottom: '10px'}}>✔️ Conditionnement respectant les normes suisses</li>
-        </ul>
+      <div className="commitment-wrapper">
+        <div className="commitment-text">
+           <p>
+            Nous collaborons avec des producteurs agricoles sélectionnés, notamment en <strong>Afghanistan</strong>, et soutenons indirectement l’activité de femmes engagées dans les étapes de récolte et de transformation, contribuant ainsi à une économie locale plus stable.
+          </p>
+           <p>
+            Pour nous, la qualité du produit final est indissociable de la qualité de vie de ceux qui le cultivent.
+           </p>
+        </div>
       </div>
     </div>
   </section>
 );
 
 const Products = () => (
-  <div className="container">
-    <section className="text-center">
-      <h1>Nos Produits</h1>
-      <p style={{maxWidth: '700px', margin: '0 auto'}}>
-        Safran en filaments pur (Crocus sativus L.). Origine : Afghanistan (Région de Herat).<br/>
-        <strong>Grade Premium ISO 3632</strong>. Couleur rouge intense, arôme puissant.
-      </p>
-    </section>
-
-    {/* SHOP */}
-    <section style={{paddingTop: 0}}>
-      <h3 style={{textAlign: 'center', marginBottom: '40px', color: '#888', textTransform: 'uppercase', fontSize: '0.9rem', letterSpacing: '2px'}}>Boutique Particuliers</h3>
+  <div style={{backgroundColor: 'var(--color-off-white)'}}>
+    <section className="container">
+      <h1 className="text-center section-title">Nos Produits</h1>
+      <p className="text-center section-subtitle">SAFRAN PREMIUM (GRADE 1) - RÉCOLTE RÉCENTE</p>
+      
       <div className="product-grid">
         {/* PRODUIT 1G */}
         <div className="card">
           <div className="card-img">Photo Sachet 1g</div>
-          <h3>Safran Premium - 1g</h3>
+          <h3 className="product-title">Safran Premium - 1g</h3>
           <p>L'excellence pour votre cuisine quotidienne.</p>
-          <p className="text-gold" style={{fontWeight: 'bold', fontSize: '1.2rem'}}>15.00 CHF</p>
-          <button className="btn btn-primary" style={{width: '100%'}}>Acheter (Stripe)</button>
+          <div className="coming-soon">Bientôt disponible</div>
+          
+          <div className="btn-group-vertical">
+             <a href="https://wa.me/41782684484?text=Bonjour,%20je%20suis%20intéressé%20par%20le%20Safran%201g" target="_blank" rel="noopener noreferrer" className="btn btn-whatsapp">
+              <Phone size={18} /> Commander via WhatsApp
+            </a>
+            <a href="mailto:info@ebrahimi-group.ch?subject=Commande%20Safran%201g" className="btn btn-outline-dark">
+              <Mail size={18} /> Commander par Email
+            </a>
+          </div>
         </div>
         {/* PRODUIT 2G */}
         <div className="card">
           <div className="card-img">Photo Sachet 2g</div>
-          <h3>Safran Premium - 2g</h3>
+          <h3 className="product-title">Safran Premium - 2g</h3>
           <p>Le format idéal pour les amateurs.</p>
-          <p className="text-gold" style={{fontWeight: 'bold', fontSize: '1.2rem'}}>28.00 CHF</p>
-          <button className="btn btn-primary" style={{width: '100%'}}>Acheter (Stripe)</button>
+           <div className="coming-soon">Bientôt disponible</div>
+           
+           <div className="btn-group-vertical">
+             <a href="https://wa.me/41782684484?text=Bonjour,%20je%20suis%20intéressé%20par%20le%20Safran%202g" target="_blank" rel="noopener noreferrer" className="btn btn-whatsapp">
+              <Phone size={18} /> Commander via WhatsApp
+            </a>
+            <a href="mailto:info@ebrahimi-group.ch?subject=Commande%20Safran%202g" className="btn btn-outline-dark">
+              <Mail size={18} /> Commander par Email
+            </a>
+          </div>
         </div>
       </div>
     </section>
 
     {/* BANNIERE B2B */}
     <section>
-      <div style={{background: '#1a1a1a', color: 'white', padding: '60px', textAlign: 'center', borderRadius: '4px'}}>
-        <h2 style={{color: 'white', border: 'none'}}>Vous êtes un professionnel ?</h2>
+      <div className="b2b-banner">
+        <h2 style={{color: 'white', border: 'none', fontFamily: 'var(--font-heading)'}}>Vous êtes un professionnel ?</h2>
         <p style={{fontSize: '1.2rem', marginBottom: '30px'}}>
-          Nous proposons des formats vrac (100g, 250g, 1kg) pour la restauration et la revente.
+           Clients professionnels en Suisse et international.
         </p>
-        <Link to="/b2b" className="btn" style={{background: '#D4AF37', color: 'black', border: 'none'}}>Accéder à l'espace Pro</Link>
+        <Link to="/b2b" className="btn btn-primary">Accéder à l'espace Pro</Link>
       </div>
     </section>
   </div>
@@ -166,25 +205,24 @@ const Products = () => (
 
 const B2B = () => (
   <section className="container">
-    <h1 className="text-center">Espace Professionnel & Export</h1>
+    <h1 className="text-center section-title">Espace Professionnel et Export</h1>
     <div style={{maxWidth: '800px', margin: '40px auto', display: 'flex', flexDirection: 'column', gap: '40px'}}>
       
-      <div>
-        <h3>Pour qui ?</h3>
+      <div className="text-center">
+        <h3 style={{fontFamily: 'var(--font-heading)'}}>Pour qui ?</h3>
         <p>Restaurants, Épiceries Fines, Grossistes, Distributeurs et Clients Export.</p>
       </div>
 
-      <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px'}}>
-        <div style={{padding: '20px', background: '#f9f9f9'}}>
-          <h4 className="text-gold">Produits & Services</h4>
+      <div className="b2b-grid">
+        <div className="info-card">
+          <h4 className="text-gold" style={{fontFamily: 'var(--font-heading)'}}>Produits et Services</h4>
           <ul>
             <li>• Vente en vrac (dès 100g)</li>
-            <li>• Conditionnement personnalisé</li>
-            <li>• Documentation export complète</li>
+            {/* Removed Conditionnement & Documentation */}
           </ul>
         </div>
-        <div style={{padding: '20px', background: '#f9f9f9'}}>
-          <h4 className="text-gold">Qualité & Documents</h4>
+        <div className="info-card">
+          <h4 className="text-gold" style={{fontFamily: 'var(--font-heading)'}}>Qualité & Documents</h4>
           <ul>
             <li>• Certificats d'analyse (ISO 3632)</li>
             <li>• Certificats d'origine</li>
@@ -206,33 +244,37 @@ const B2B = () => (
 
 const Contact = () => (
   <section className="container">
-    <div style={{maxWidth: '600px', margin: '0 auto'}}>
-      <h1 className="text-center">Contactez-nous</h1>
-      <p className="text-center mb-40">Pour toute demande de devis B2B ou information.</p>
+    <div style={{maxWidth: '700px', margin: '0 auto'}}>
+      <h1 className="text-center section-title">Contactez-nous</h1>
+      <p className="text-center mb-40" style={{fontSize: '1.1rem'}}>
+        Pour toute demande de devis, partenariat ou information générale, notre équipe est à votre disposition.<br/>
+        <strong className="text-gold">info@ebrahimi-group.ch</strong>
+      </p>
       
       {/* FORMULAIRE - Connecter à Formspree plus tard */}
-      <form style={{display: 'flex', flexDirection: 'column', gap: '20px'}}>
-        <div>
-          <label style={{fontWeight: 'bold', display: 'block', marginBottom: '5px'}}>Nom complet</label>
-          <input type="text" style={{width: '100%', padding: '12px', border: '1px solid #ddd'}} required />
+      <form className="contact-form">
+        <div className="form-group">
+          <label>Nom complet</label>
+          <input type="text" required placeholder="Votre Nom" />
         </div>
-        <div>
-          <label style={{fontWeight: 'bold', display: 'block', marginBottom: '5px'}}>Email professionnel</label>
-          <input type="email" style={{width: '100%', padding: '12px', border: '1px solid #ddd'}} required />
+        <div className="form-group">
+          <label>Email professionnel</label>
+          <input type="email" required placeholder="nom@entreprise.com" />
         </div>
-        <div>
-          <label style={{fontWeight: 'bold', display: 'block', marginBottom: '5px'}}>Objet</label>
-          <select style={{width: '100%', padding: '12px', border: '1px solid #ddd'}}>
+        <div className="form-group">
+          <label>Objet</label>
+          <select>
             <option>Demande de devis (Vrac/Pro)</option>
             <option>Question sur une commande</option>
+            <option>Partenariat / Export</option>
             <option>Autre</option>
           </select>
         </div>
-        <div>
-          <label style={{fontWeight: 'bold', display: 'block', marginBottom: '5px'}}>Message</label>
-          <textarea rows="6" style={{width: '100%', padding: '12px', border: '1px solid #ddd'}} required></textarea>
+        <div className="form-group">
+          <label>Message</label>
+          <textarea rows="6" required placeholder="Comment pouvons-nous vous aider ?"></textarea>
         </div>
-        <button type="submit" className="btn btn-primary">Envoyer</button>
+        <button type="submit" className="btn btn-primary" style={{width: '100%'}}>Envoyer le message</button>
       </form>
     </div>
   </section>
@@ -240,10 +282,10 @@ const Contact = () => (
 
 const Legal = () => (
   <section className="container">
-    <h1>Mentions Légales</h1>
-    <div style={{fontSize: '0.9rem', color: '#555', maxWidth: '800px'}}>
+    <h1 className="section-title">Mentions Légales</h1>
+    <div style={{fontSize: '0.9rem', color: '#555', maxWidth: '800px', lineHeight: '1.8'}}>
       <h3>1. Éditeur</h3>
-      <p>Ebrahimi Group - Suisse<br/>Contact : contact@ebrahimi-group.ch</p>
+      <p>Ebrahimi Group - Suisse<br/>Contact : info@ebrahimi-group.ch</p>
       <h3>2. Responsabilité</h3>
       <p>L'ensemble de ce site relève de la législation suisse. Les informations fournies le sont à titre indicatif. Ebrahimi Group ne saurait être tenu responsable des erreurs ou omissions.</p>
     </div>
