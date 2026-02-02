@@ -199,7 +199,7 @@ const About = () => (
 );
 
 const Products = () => (
-  <div style={{backgroundColor: 'white'}}>
+  <div style={{backgroundColor: 'white'}} className="page-header-spacer">
     <section className="container">
       <div className="text-center">
         <h1 className="section-title">Notre Collection</h1>
@@ -306,7 +306,7 @@ const B2B = () => (
 );
 
 const Contact = () => (
-  <section className="container">
+  <section className="container page-header-spacer">
     <div className="text-center mb-40">
       <h1 className="section-title">Prenons Contact</h1>
       <p className="section-subtitle">UNE QUESTION ? UN PROJET ? NOUS SOMMES À VOTRE ÉCOUTE.</p>
