@@ -78,7 +78,6 @@ const Footer = () => (
       </div>
       <div className="footer-bottom">
         <span>© {new Date().getFullYear()} Ebrahimi Group. Tous droits réservés.</span>
-        <Link to="/legal">Mentions Légales</Link>
       </div>
     </div>
   </footer>
@@ -280,22 +279,12 @@ const Contact = () => (
   </section>
 );
 
-const Legal = () => (
-  <section className="container">
-    <h1 className="section-title">Mentions Légales</h1>
-    <div style={{fontSize: '0.9rem', color: '#555', maxWidth: '800px', lineHeight: '1.8'}}>
-      <h3>1. Éditeur</h3>
-      <p>Ebrahimi Group - Suisse<br/>Contact : info@ebrahimi-group.ch</p>
-      <h3>2. Responsabilité</h3>
-      <p>L'ensemble de ce site relève de la législation suisse. Les informations fournies le sont à titre indicatif. Ebrahimi Group ne saurait être tenu responsable des erreurs ou omissions.</p>
-    </div>
-  </section>
-);
+
 
 // --- APP ---
 function App() {
   return (
-    <Router>
+    <Router basename={import.meta.env.BASE_URL}>
       <ScrollToTop />
       <Navbar />
       <Routes>
@@ -304,7 +293,6 @@ function App() {
         <Route path="/products" element={<Products />} />
         <Route path="/b2b" element={<B2B />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/legal" element={<Legal />} />
       </Routes>
       <Footer />
     </Router>
