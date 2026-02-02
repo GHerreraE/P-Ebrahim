@@ -29,7 +29,7 @@ const Navbar = () => {
       <div className="top-bar">
         <div className="container top-bar-flex">
           <div className="top-bar-info">
-            <span className="desktop-only"><Mail size={14} color="var(--color-green)"/> info@ebrahimi-group.ch</span>
+            <span><Mail size={14} color="var(--color-green)"/> info@ebrahimi-group.ch</span>
             <span><Phone size={14} color="var(--color-green)"/> +41 78 268 44 84</span>
           </div>
           <div>
