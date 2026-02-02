@@ -148,27 +148,71 @@ h3 { font-size: 1.5rem; font-weight: 600; }
 section { padding: 100px 0; }
 
 /* Navbar - Clean PRO White */
-nav {
+/* Top Bar */
+.top-bar {
+  background-color: var(--color-white);
+  border-bottom: 1px solid #eaeaea;
   padding: 10px 0;
+  font-size: 0.85rem;
+  color: var(--color-text);
+}
+.top-bar-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.top-bar-info {
+  display: flex;
+  gap: 25px;
+}
+.top-bar-info span {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.top-bar-link {
+  color: var(--color-green);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+}
+.top-bar-link:hover { color: var(--color-green-dark); }
+
+/* Navbar - Clean PRO White */
+nav {
+  padding: 15px 0; /* Un peu plus d'espace */
   position: sticky;
   top: 0;
-  background: rgba(255, 255, 255, 0.98);
+  background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(10px);
   z-index: 1000;
   border-bottom: 1px solid rgba(0,0,0,0.05);
-  box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.03); /* Ombre plus douce */
 }
 .nav-flex { display: flex; justify-content: space-between; align-items: center; }
-.logo-container { display: block; height: 75px; /* LOGO AGRANDI */ }
-.nav-logo { height: 100%; width: auto; object-fit: contain; /* Pas de filtre, on veut les couleurs */ } 
+.logo-container { display: block; height: 60px; /* Logo ajusté */ }
+.nav-logo { height: 100%; width: auto; object-fit: contain; } 
 
-.nav-links { display: flex; gap: 40px; font-size: 0.9rem; font-weight: 600; text-transform: uppercase; color: var(--color-black); }
-.nav-links a { position: relative; padding: 5px 0; }
+.nav-links { 
+  display: flex; 
+  gap: 40px; 
+  font-size: 0.95rem; /* Texte un peu plus grand */
+  font-weight: 500; 
+  text-transform: uppercase; 
+  letter-spacing: 0.5px;
+  color: var(--color-black); 
+}
+.nav-links a { position: relative; padding: 5px 0; transition: color 0.3s; }
 .nav-links a::after {
   content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px;
-  background: var(--color-green); transition: width 0.3s;
+  background: var(--color-gold); /* Soulignement Or */
+  transition: width 0.3s ease;
 }
-.nav-links a:hover { color: var(--color-green); }
+.nav-links a:hover { color: var(--color-gold); }
 .nav-links a:hover::after { width: 100%; }
 
 /* Hero Section */

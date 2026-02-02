@@ -24,36 +24,51 @@ const Navbar = () => {
   }, [location]);
 
   return (
-    <nav>
-      <div className="container nav-flex">
-        <Link to="/" className="logo-container">
-          <img src={logoImg} alt="Ebrahimi Group" className="nav-logo" />
-        </Link>
-
-        {/* Desktop Menu */}
-        <div className="nav-links desktop-only">
-          <Link to="/">Accueil</Link>
-          <Link to="/about">À Propos</Link>
-          <Link to="/products">Nos Produits</Link>
-          <Link to="/b2b">Espace Pro</Link>
-          <Link to="/contact">Contact</Link>
-        </div>
-
-        {/* Mobile Menu Button */}
-        <button className="mobile-menu-btn" onClick={() => setIsOpen(!isOpen)}>
-          {isOpen ? <X size={28} color="var(--color-black)" /> : <Menu size={28} color="var(--color-black)" />}
-        </button>
-
-        {/* Mobile Dropdown */}
-        <div className={`mobile-menu ${isOpen ? 'open' : ''}`}>
-          <Link to="/">Accueil</Link>
-          <Link to="/about">À Propos</Link>
-          <Link to="/products">Nos Produits</Link>
-          <Link to="/b2b">Espace Pro</Link>
-          <Link to="/contact">Contact</Link>
+    <>
+      {/* Top Bar - Contact & Pro */}
+      <div className="top-bar">
+        <div className="container top-bar-flex">
+          <div className="top-bar-info">
+            <span className="desktop-only"><Mail size={14} color="var(--color-green)"/> info@ebrahimi-group.ch</span>
+            <span><Phone size={14} color="var(--color-green)"/> +41 78 268 44 84</span>
+          </div>
+          <div>
+            <Link to="/b2b" className="top-bar-link">Espace Pro <Truck size={14} /></Link>
+          </div>
         </div>
       </div>
-    </nav>
+
+      {/* Main Navbar */}
+      <nav>
+        <div className="container nav-flex">
+          <Link to="/" className="logo-container">
+            <img src={logoImg} alt="Ebrahimi Group" className="nav-logo" />
+          </Link>
+
+          {/* Desktop Menu */}
+          <div className="nav-links desktop-only">
+            <Link to="/">Accueil</Link>
+            <Link to="/about">À Propos</Link>
+            <Link to="/products">Nos Produits</Link>
+            <Link to="/contact">Contact</Link>
+          </div>
+
+          {/* Mobile Menu Button */}
+          <button className="mobile-menu-btn" onClick={() => setIsOpen(!isOpen)}>
+            {isOpen ? <X size={28} color="var(--color-black)" /> : <Menu size={28} color="var(--color-black)" />}
+          </button>
+
+          {/* Mobile Dropdown */}
+          <div className={`mobile-menu ${isOpen ? 'open' : ''}`}>
+            <Link to="/">Accueil</Link>
+            <Link to="/about">À Propos</Link>
+            <Link to="/products">Nos Produits</Link>
+            <Link to="/b2b">Espace Pro</Link>
+            <Link to="/contact">Contact</Link>
+          </div>
+        </div>
+      </nav>
+    </>
   );
 };
 
