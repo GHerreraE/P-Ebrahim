@@ -127,19 +127,31 @@ const Footer = () => (
 const Home = () => (
   <>
     {/* HERO SECTION */}
+    {/* HERO SECTION */}
     <div className="hero-section" style={{
       backgroundImage: `url(${headerBg})`
     }}>
       <div className="hero-overlay"></div>
       <div className="container hero-content">
-        <h1 className="hero-title">DISTRIBUTEUR<br/>SAFRAN ET PRODUITS ALIMENTAIRES SECS</h1>
+        <span className="hero-surtitle">DISTRIBUTEUR OFFICIEL</span>
+        <h1 className="hero-title">SAFRAN PREMIUM<br/>& ÉPICERIE FINE</h1>
         <p className="hero-subtitle">
-          Partenaire privilégié des professionnels de la gastronomie et de l'industrie.
-          <br/>Importation directe, certification ISO 3632 et traçabilité totale.
+          Le lien direct entre les terroirs d'exception et la gastronomie suisse.<br/>
+          Importation éthique, Grade 1 (ISO 3632) et traçabilité totale.
         </p>
         <div style={{display: 'flex', gap: '20px', justifyContent: 'center', flexWrap: 'wrap'}}>
-          <Link to="/products" className="btn btn-primary">Nos Produits</Link>
-          <Link to="/contact" className="btn btn-outline-dark">Devenir Partenaire</Link>
+          <Link to="/products" className="btn btn-primary">Découvrir la Collection</Link>
+          <Link to="/contact" className="btn btn-outline">Devenir Partenaire</Link>
+        </div>
+      </div>
+      
+      {/* Scroll Indicator */}
+      <div className="scroll-indicator">
+        <div style={{color: 'white', display: 'flex', flexDirection: 'column', alignItems: 'center', fontSize: '0.8rem', opacity: 0.8}}>
+          <span style={{marginBottom: '10px', letterSpacing: '2px', textTransform: 'uppercase'}}>Explorer</span>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
         </div>
       </div>
     </div>
@@ -187,41 +199,54 @@ const About = () => (
 );
 
 const Products = () => (
-  <div style={{backgroundColor: 'var(--color-off-white)'}}>
+  <div style={{backgroundColor: 'white'}}>
     <section className="container">
-      <h1 className="text-center section-title">Nos Produits</h1>
-      <p className="text-center section-subtitle">SAFRAN PREMIUM (GRADE 1) - RÉCOLTE RÉCENTE</p>
+      <div className="text-center">
+        <h1 className="section-title">Notre Collection</h1>
+        <p className="section-subtitle">SAFRAN PREMIUM (GRADE 1) - EXCELLENCE SUISSE</p>
+      </div>
       
       <div className="product-grid">
         {/* PRODUIT 1G */}
-        <div className="card">
-          <div className="card-img">Photo Sachet 1g</div>
-          <h3 className="product-title">Safran Premium - 1g</h3>
-          <p>L'excellence pour votre cuisine quotidienne.</p>
-          <div className="coming-soon">Bientôt disponible</div>
-          
-          <div className="btn-group-vertical">
-             <a href="https://wa.me/41782684484?text=Bonjour,%20je%20suis%20intéressé%20par%20le%20Safran%201g" target="_blank" rel="noopener noreferrer" className="btn btn-whatsapp">
-              <Phone size={18} /> Commander via WhatsApp
+        <div className="product-card">
+          <div className="packshot-container">
+            <div className="packshot-saffron"></div>
+          </div>
+          <div className="product-meta">
+            <span className="coming-soon-badge">Bientôt Disponible</span>
+            <h3 className="product-title">Éclat de Safran - 1g</h3>
+            <p className="product-desc">L'excellence pour votre cuisine quotidienne. <br/>Pureté certifiée ISO 3632.</p>
+            
+            <a href="mailto:info@ebrahimi-group.ch?subject=Commande%20Safran%201g" 
+               className="btn btn-luxury">
+               <Mail size={16} style={{marginRight: '8px'}}/> COMMANDER PAR EMAIL
             </a>
-            <a href="mailto:info@ebrahimi-group.ch?subject=Commande%20Safran%201g" className="btn btn-outline-dark">
-              <Mail size={18} /> Commander par Email
+            <a href="https://wa.me/41782684484?text=Bonjour,%20je%20souhaite%20commander%20l'Éclat%20de%20Safran%20(1g)" 
+               target="_blank" rel="noopener noreferrer" 
+               className="link-discrete">
+               <Phone size={14} /> ou via WhatsApp
             </a>
           </div>
         </div>
+
         {/* PRODUIT 2G */}
-        <div className="card">
-          <div className="card-img">Photo Sachet 2g</div>
-          <h3 className="product-title">Safran Premium - 2g</h3>
-          <p>Le format idéal pour les amateurs.</p>
-           <div className="coming-soon">Bientôt disponible</div>
-           
-           <div className="btn-group-vertical">
-             <a href="https://wa.me/41782684484?text=Bonjour,%20je%20suis%20intéressé%20par%20le%20Safran%202g" target="_blank" rel="noopener noreferrer" className="btn btn-whatsapp">
-              <Phone size={18} /> Commander via WhatsApp
+        <div className="product-card">
+          <div className="packshot-container">
+            <div className="packshot-saffron"></div>
+          </div>
+          <div className="product-meta">
+            <span className="coming-soon-badge">Bientôt Disponible</span>
+            <h3 className="product-title">Trésor de Safran - 2g</h3>
+            <p className="product-desc">Le format idéal pour les connaisseurs. <br/>Arôme intense et couleur profonde.</p>
+            
+            <a href="mailto:info@ebrahimi-group.ch?subject=Commande%20Safran%202g" 
+               className="btn btn-luxury">
+               <Mail size={16} style={{marginRight: '8px'}}/> COMMANDER PAR EMAIL
             </a>
-            <a href="mailto:info@ebrahimi-group.ch?subject=Commande%20Safran%202g" className="btn btn-outline-dark">
-              <Mail size={18} /> Commander par Email
+            <a href="https://wa.me/41782684484?text=Bonjour,%20je%20souhaite%20commander%20le%20Trésor%20de%20Safran%20(2g)" 
+               target="_blank" rel="noopener noreferrer" 
+               className="link-discrete">
+               <Phone size={14} /> ou via WhatsApp
             </a>
           </div>
         </div>
@@ -233,7 +258,7 @@ const Products = () => (
       <div className="b2b-banner">
         <h2 style={{color: 'white', border: 'none', fontFamily: 'var(--font-heading)'}}>Vous êtes un professionnel ?</h2>
         <p style={{fontSize: '1.2rem', marginBottom: '30px'}}>
-           Clients professionnels en Suisse et international.
+           Restaurants, Épiceries fines et Industrie. Tarifs préférentiels.
         </p>
         <Link to="/b2b" className="btn btn-primary">Accéder à l'espace Pro</Link>
       </div>

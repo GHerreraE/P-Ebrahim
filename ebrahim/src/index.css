@@ -215,38 +215,85 @@ nav {
 .nav-links a:hover { color: var(--color-gold); }
 .nav-links a:hover::after { width: 100%; }
 
-/* Hero Section */
+/* Hero Section - CINEMATIC */
 .hero-section {
   position: relative;
-  background-color: var(--color-black); 
+  background-color: var(--color-black); /* Fallback */
   color: white; 
-  padding: 180px 0; 
+  height: 90vh; /* Grand écran immersif */
+  min-height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
   background-size: cover;
   background-position: center;
+  background-attachment: fixed; /* Parallax simple */
 }
+
 .hero-overlay {
   position: absolute; top:0; left:0; width:100%; height:100%;
-  background: linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.85)); /* Fond blanchâtre pour lisibilité */
+  background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.7) 100%); /* Dégradé sombre cinématique */
   z-index: 1;
 }
-.hero-content { position: relative; z-index: 2; }
+
+.hero-content { 
+  position: relative; 
+  z-index: 2; 
+  max-width: 900px;
+  animation: fadeUp 1.2s ease-out;
+}
+
+.hero-surtitle {
+  font-size: 1rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  margin-bottom: 20px;
+  display: block;
+  font-weight: 600;
+}
 
 .hero-title {
-  margin-bottom: 24px; 
-  text-shadow: none; /* Plus d'ombre sur fond clair */
-  font-size: 3.5rem;
-  color: var(--color-green-dark); /* Texte foncé */
+  margin-bottom: 30px; 
+  text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  font-size: 4rem;
+  line-height: 1.1;
+  color: white;
+  font-weight: 400; /* Serif élégant */
 }
+
 .hero-subtitle {
-  font-size: 1.3rem; 
-  max-width: 800px; 
+  font-size: 1.2rem; 
+  max-width: 700px; 
   margin: 0 auto 50px; 
-  font-weight: 500;
-  opacity: 1;
+  font-weight: 300;
+  opacity: 0.9;
   font-family: var(--font-main);
-  line-height: 1.6;
-  color: var(--color-text); /* Texte foncé */
+  line-height: 1.8;
+  color: #f0f0f0;
+}
+
+/* Scroll Indicator */
+.scroll-indicator {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  animation: bounce 2s infinite;
+  opacity: 0.7;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {transform: translateX(-50%) translateY(0);}
+  40% {transform: translateX(-50%) translateY(-10px);}
+  60% {transform: translateX(-50%) translateY(-5px);}
 }
 
 /* Features Grid */
@@ -352,45 +399,123 @@ nav {
   /* ... */
 }
 
-/* Cartes Produits */
-.product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-.card { 
+/* Cartes Produits - HYBRID (Structure classique + Touche Luxe) */
+.product-grid { 
+  display: grid; 
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+  gap: 30px;
+  margin-top: 50px;
+  max-width: 1000px; /* Limite la largeur totale pour éviter des cartes géantes */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.product-card { 
   background: white;
   border: 1px solid #eaeaea; 
-  padding: 40px; 
-  transition: all 0.4s ease; 
+  padding: 30px; 
   text-align: center; 
+  transition: all 0.4s ease;
   border-radius: var(--radius-std);
   position: relative;
   overflow: hidden;
 }
-.card:hover { 
+.product-card:hover { 
   transform: translateY(-5px); 
   box-shadow: var(--shadow-hover); 
   border-color: var(--color-gold);
 }
-.card-img { 
-  height: 220px; 
-  background-color: var(--color-off-white); 
-  margin-bottom: 30px; 
-  display: flex; 
-  align-items: center; 
-  justify-content: center; 
-  color: #ccc; 
+
+/* Packshot Luxe (CSS Only) - Conservé car "un peu" les cartes d'avant */
+.packshot-container {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: #f8f8f8; /* Tres clair */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30px;
+  position: relative;
+  overflow: hidden;
   border-radius: var(--radius-std);
 }
-.product-title { margin-bottom: 8px; font-family: var(--font-heading); color: var(--color-black); }
-.coming-soon {
-  display: inline-block;
-  background: var(--color-gray-light);
-  color: var(--color-text-light);
-  font-size: 0.75rem;
-  padding: 4px 10px;
-  border-radius: 100px;
-  margin-bottom: 20px;
+.packshot-saffron {
+  /* Placeholder neutre pour future photo */
+  width: 100%;
+  height: 100%;
+  background: #eeeeee; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ccc;
+  font-size: 0.8rem;
   text-transform: uppercase;
-  font-weight: 600;
+  letter-spacing: 1px;
 }
+.packshot-saffron::after {
+  content: 'Photo à venir'; 
+}
+.product-card:hover .packshot-saffron {
+  /* Pas d'effet spécial sur le placeholder */
+  transform: none;
+  box-shadow: none;
+}
+
+.product-meta { padding: 0; }
+
+.product-title { 
+  margin-bottom: 10px; 
+  font-family: var(--font-heading); 
+  font-size: 1.35rem; /* Plus petit */
+  color: var(--color-black); 
+  font-weight: 600; 
+}
+.product-desc {
+  color: #666;
+  font-size: 0.9rem; /* Plus compact */
+  margin-bottom: 20px;
+}
+
+.coming-soon-badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  border: 1px solid var(--color-gold);
+  padding: 5px 15px;
+  margin-bottom: 20px;
+}
+
+/* Actions simplifiées */
+.btn-luxury {
+  background: var(--color-black);
+  color: white;
+  padding: 12px 25px;
+  width: 100%;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  border-radius: var(--radius-std);
+  text-transform: uppercase;
+  font-weight: 500;
+}
+.btn-luxury:hover {
+  background: var(--color-green); /* Touche verte Ebrahimi */
+  transform: translateY(-2px);
+}
+
+.link-discrete {
+  display: block;
+  margin-top: 15px;
+  font-size: 0.8rem;
+  color: #999;
+  text-decoration: none;
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
+  gap: 5px;
+}
+.link-discrete:hover { color: #25D366; /* Vert WhatsApp */ }
 
 /* B2B Banner and Grid */
 .b2b-banner {
