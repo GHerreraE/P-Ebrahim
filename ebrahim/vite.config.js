@@ -7,6 +7,7 @@ export default defineConfig({
   // Remplace 'NOM_DU_REPO' par le nom exact de ton dépôt GitHub (ex: '/ebrahim/' ou '/P-Ebrahim/')
   base: '/P-Ebrahim/',
   build: {
-    outDir: 'docs',
+    outDir: '../docs',
+    emptyOutDir: true,
   }
 })
